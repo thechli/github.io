@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<!-- saved from url=(0023)https://www.baipp.pp.ua -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>Quantumult分享链接转换</title>
+<style>
+.adver-box img,
+#qrcode{width: 90%; max-width: 256px; color: #D2322D;}
+.adver-box img{border: 1px solid #ccc;}
+.base-input{width: 90%; max-width: 256px; height: 75px; line-height: 24px; color: #000; font-size: 14px; border: 1px solid #ccc;}
+</style>
+</head>
+	
+<body>
+    <center>
+        <div class="adver-box">
+            <a href="https://www.baipp.pp.ua/" target="_blank">
+                <img src="quan/005.png" alt="白嫖派-GATESX">
+            </a>
+        </div>
+        <h3>正常V2ray分享链接</h3>
+        <textarea class="base-input" id="text" type="text" placeholder="请输入正常的V2ray分享链接" rows="23.333" cols="23.333" autofocus=""></textarea>
+        <h3>Quantumult V2ray分享链接</h3>
+        <textarea class="base-input" id="baseAll" type="text" placeholder="转换完成的V2ray分享链接" readonly=""></textarea>
+        <h3 id="qrcodeTitle" style="display: none;">请用Quantumult扫描二维码添加 </h3>
+        <p id="qrcode"></p>    
+    </center>
+<script src="https://cdn.jsdelivr.net/gh/thechli/js@1.0/jquery-qrcode.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/thechli/js@1.0/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/thechli/js@1.0/jquery-qrcode.min_1.js"></script> 
+<script src="https://cdn.jsdelivr.net/gh/thechli/js@1.0/base64.js"></script>
+<script type="text/javascript">
+    $(function () {
+        function qr(text) {
+            var options = {
+                render: 'canvas',
+                size: 300,
+                ecLevel: 'Q',
+                fill: '#233',
+                background: null,
+                text: text,
+                label: 'eicky.com',
+                fontname: 'sans',
+                fontcolor: '#233',
+                quiet: 0,
+                mode: 2
+            };
+            $("#qrcode").empty().qrcode(options);
+        }
+		$("#text").on("input", function (e) {
+			var v = $(e.target).val();
+			baseChange(v)
+			var v = $("#baseAll").val();
+	        if (v == "") {
+	            qrcode.innerHTML = '输入错误，小火箭分享链接可能会出现空格导致错误'
+	        } else {
+	        	$("#qrcodeTitle").show();
+	            qr(v);
+	        }
+	    })
+		function baseChange(String){
+			var configStr = String.substring(8);
+			if(configStr == "") {
+				return;
+			}
+			try{
+				var baseStr = JSON.parse(Base64.decode(configStr));
+					baseStr.tls = "tls" == baseStr.tls
+				if(baseStr.ps == "undefined" || baseStr.ps == null || baseStr.ps == "") {
+					baseStr.ps = baseStr.add
+				}
+				if(baseStr.type  == "undefined" || baseStr.type  == null || baseStr.type  == "") {
+					baseStr.type = 'none'
+				}
+				var baseStrAdd1 = baseStr.ps+" = vmess,"+baseStr.add+","+baseStr.port+","+baseStr.type+","+"\""+baseStr.id+"\""+","+"over-tls="+baseStr.tls+","+"tls-host="+baseStr.host+",certificate=1";
+				var baseStrAdd2 = '';
+				if("http" == baseStr.net || "ws" == baseStr.net){
+					baseStrAdd2 = ",obfs="+baseStr.net +",obfs-path="+"\""+baseStr.path+"\""+"obfs-header="+"\""+"Host:"+baseStr.host+"[Rr][Nn]User-Agent:"+navigator.userAgent;
+				};
+				var baseStrAdd3 = baseStrAdd1 + baseStrAdd2;
+				var baseData = Base64.encode(baseStrAdd3);
+				var baseDataAll = "vmess://" + baseData;
+				$("#baseAll").val(baseDataAll);
+			} catch(err) {
+				return;
+			}
+			
+		};
+    })
+    "serviceWorker"in navigator&&navigator.serviceWorker.register("/tools/sw.js");
+</script>
+
+<div style="position: static; display: none; width: 0px; height: 0px; border: none; padding: 0px; margin: 0px;"><div id="trans-tooltip"><div id="tip-left-top" style="background: url(&quot;chrome-extension://edhchknefojhifoiebpcbkhcjlkkklci/imgs/map/tip-left-top.png&quot;);"></div><div id="tip-top" style="background: url(&quot;chrome-extension://edhchknefojhifoiebpcbkhcjlkkklci/imgs/map/tip-top.png&quot;) repeat-x;"></div><div id="tip-right-top" style="background: url(&quot;chrome-extension://edhchknefojhifoiebpcbkhcjlkkklci/imgs/map/tip-right-top.png&quot;);"></div><div id="tip-right" style="background: url(&quot;chrome-extension://edhchknefojhifoiebpcbkhcjlkkklci/imgs/map/tip-right.png&quot;) repeat-y;"></div><div id="tip-right-bottom" style="background: url(&quot;chrome-extension://edhchknefojhifoiebpcbkhcjlkkklci/imgs/map/tip-right-bottom.png&quot;);"></div><div id="tip-bottom" style="background: url(&quot;chrome-extension://edhchknefojhifoiebpcbkhcjlkkklci/imgs/map/tip-bottom.png&quot;) repeat-x;"></div><div id="tip-left-bottom" style="background: url(&quot;chrome-extension://edhchknefojhifoiebpcbkhcjlkkklci/imgs/map/tip-left-bottom.png&quot;);"></div><div id="tip-left" style="background: url(&quot;chrome-extension://edhchknefojhifoiebpcbkhcjlkkklci/imgs/map/tip-left.png&quot;);"></div><div id="trans-content"></div></div><div id="tip-arrow-bottom" style="background: url(&quot;chrome-extension://edhchknefojhifoiebpcbkhcjlkkklci/imgs/map/tip-arrow-bottom.png&quot;);"></div><div id="tip-arrow-top" style="background: url(&quot;chrome-extension://edhchknefojhifoiebpcbkhcjlkkklci/imgs/map/tip-arrow-top.png&quot;);"></div></div></body></html>
